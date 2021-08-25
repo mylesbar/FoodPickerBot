@@ -1,10 +1,30 @@
 //main js file
 
 /**
- * Startup
+ * Startup and Discord API Setup
  */
 const Discord = require('discord.js');
 const client = new Discord.Client( {intents: ["GUILDS", "GUILD_MESSAGES"]});
+
+client.commands = new Discord.Collection();
+client.events = new Discord.Collection();
+
+const fs = require('fs');
+
+const commandFiles = fs.readdirSync('./commands/').filter(file=>file.endsWith('.js'));
+
+for(const file of commandFiles){
+    const command = require(`./commands/${file}`);
+
+    client.commands.set(command.name, command);
+}
+
+
+
+// ['command_handler','event_handler'].forEach(handler => {
+//     require(`./handlers/${handler}`)(client,Discord);
+// })
+
 client.once('ready', () =>{ 
     console.log('Foodpicker bot is online');
 } );
@@ -21,13 +41,8 @@ client.once('ready', () =>{
  today = mm + '/' + dd + '/' + yyyy;
 
 var uses = 0;
-
 var testArray = ["pizza","burger","ramen","chinese takeout","popeyes","checkers","halal","bdubs","cook your own food dummy","quesadillas"];
 console.log(`Food: ${testArray}`);
-
-function randomGet(){
-    return testArray[Math.floor(Math.random()*testArray.length)];
-}
 
 /**
  * Message Handler
@@ -56,29 +71,28 @@ client.on('messageCreate', message =>{
     // }
 
     if(command === 'ping'){
-        console.log('ping successful');
-        message.channel.send('pong');
+        // console.log('ping successful');
+        // message.channel.send('pong');
+
+        client.commands.get('ping').execute(message,args)
 
     }else if(command==='random'){
 
-        console.log('random select');
-        var food = randomGet();
-        message.channel.send(`You should get ${food}`);
+        client.commands.get('random').execute(message,args,testArray)
+
         
     }else if(command==='options'){
-        console.log('options select');
-        message.channel.send(`Here are your options: ${testArray}`);
+
+        client.commands.get('options').execute(message,args,testArray)
+        
+
+        // message.channel.send(`Here are your options: ${strOut.slice(0,-2)}`);
 
     }else if(command==='help'){
 
-        console.log('help select');
-        message.channel.send(
-        `Functions:
-        +random: Sends chat a random food item you should get.
-        +options: Sends chat a bunch of options you can get.
-        +vote: Democracy (to be added later if I'm not lazy)
-        +help: you in here dummy`);
 
+        client.commands.get('help').execute(message,args)
+        
     }else{
         console.log('default');
     }
@@ -87,6 +101,6 @@ client.on('messageCreate', message =>{
     
 });
 //Token omitted to separate file
-client.login('');
+client.login('ODc5NTI5Mjg3NjEzNTU0Nzk4.YSRDew.-AHAlJP2RW949hUoJxYECXxnW9U');
 
 
