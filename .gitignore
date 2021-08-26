@@ -117,5 +117,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-#Discord Token
+#Discord Token & Sensitive info
 token.txt
+config.json
