@@ -18,12 +18,12 @@ const client = new Discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES"]
 });
 
-const prefix = config.PREFIX;
+const prefix = process.env.PREFIX;
 const fs = require("fs");
 const commandFiles = fs
   .readdirSync("./commands/")
   .filter((file) => file.endsWith(".js"));
-const MONGODB_SRV = config.MONGODB_SRV;
+const MONGODB_SRV = process.env.MONGODB_SRV;
 
 
 mongoose
