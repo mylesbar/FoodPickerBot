@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Discord bot to figure out what to eat. Made for learning javascript purposes.",
   "main": "main.js",
+  "start" : "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    
   },
   "author": "Mills",
   "license": "ISC",

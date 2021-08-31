@@ -8,8 +8,16 @@
 const config = require("./config.json");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
+const express = require('express');
 
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const app = express();
+
+
+
+const client = new Discord.Client({
+  intents: ["GUILDS", "GUILD_MESSAGES"]
+});
+
 const prefix = config.PREFIX;
 const fs = require("fs");
 const commandFiles = fs
@@ -30,6 +38,8 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+
 
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
@@ -55,8 +65,7 @@ var today = new Date();
 var dd = String(today.getDate()).padStart(2, "0");
 var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
 var yyyy = today.getFullYear();
-var time =
-  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 today = mm + "/" + dd + "/" + yyyy;
 
 var uses = 0;
