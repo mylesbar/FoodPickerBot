@@ -122,4 +122,4 @@ client.on("messageCreate", (message) => {
 
 //Token omitted to separate file
 
-client.login(config.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN);
