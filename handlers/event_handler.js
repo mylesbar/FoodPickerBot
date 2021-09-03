@@ -1,61 +1,19 @@
-//TODO
+require("../config.json");
 
-// /**
-//  * Message Handler
-//  */
-//  const prefix ='+';
-// client.on('messageCreate', message =>{
+const debug = true;
 
-//     if( !message.content.startsWith(prefix) || message.author.bot) return;
+if (debug) {
+  const fs = require("fs");
+  module.exports = (client,Discord)=>{
+      const load_dir = (dirs) =>{
+          const event_files = fs.readdirSync(`./events/${dirs}`).filter(file => file.endsWith('.js'));
 
-//     const args = message.content.slice(prefix.length).split("/ +/");
-//     const command = args.shift().toLowerCase();
-
-//     uses++;
-//     console.log(`uses: ${uses}`);
-    
-//     // switch(command){
-//     //     case command==='ping':
-//     //         console.log('ping successful');
-//     //         message.channel.send('pong');
-//     //         break;
-//     //     case command==='random':
-//     //         console.log('switch in random');
-//     //         var food = testArray[Math.floor(Math.random()*testArray.length)];
-//     //         message.channel.send(`You should get ${food}`);
-//     //         break;
-//     // }
-
-//     if(command === 'ping'){
-//         console.log('ping successful');
-//         message.channel.send('pong');
-
-//     }else if(command==='random'){
-
-//         console.log('random select');
-//         var food = randomGet();
-//         message.channel.send(`You should get ${food}`);
-        
-//     }else if(command==='options'){
-//         console.log('options select');
-//         var strOut = '';
-//         testArray.forEach(element => strOut+=element + ", ");
-//         // console.log(`before ${strOut}`);
-//         // strOut = strOut.slice(0,-2);
-//         // console.log(`after ${strOut}`);
-
-//         message.channel.send(`Here are your options: ${strOut.slice(0,-2)}`);
-
-//     }else if(command==='help'){
-
-//         console.log('help select');
-//         message.channel.send(
-//         `Functions:
-//         +random: Sends chat a random food item you should get.
-//         +options: Sends chat a bunch of options you can get.
-//         +vote: Democracy (to be added later if I'm not lazy)
-//         +help: you in here dummy`);
-
-//     }else{
-//         console.log('default');
-//     }
+          for(const file of event_files){
+              const event = require(`../events/${dirs}/${file}`);
+              const event_name = file.split('.')[0];
+              client.on(event_name,event.bind(null,Discord,client));
+          }
+      }
+      ['client','guild'].forEach(e => load_dir(e));
+  }
+}else{console.log('event handler not in debug mode');}

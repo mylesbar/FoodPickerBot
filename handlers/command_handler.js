@@ -1,15 +1,36 @@
 //TODO
+require('../config.json');
+const fs = require('fs');
 
-// const fs = require('fs');
+const debug = true;
 
-// module.exports=(client,Discord)=>{
-//      const command_files=fs.readdirSync('./commands/').filter(file=>file.endsWith('.js'))
-// }
+if(debug){
+
+
+module.exports=(client,Discord)=>{
+     const command_files=fs.readdirSync('./commands/').filter(file=>file.endsWith('.js'))
+
+     for(const file of command_files){
+         const command = require(`../commands/${file}`)
+         if(command.name){
+             client.commands.set(command.name, command);
+         }else{
+             console.log('continued');
+             continue;
+         }
+     }
+}
+
+
+
+
+
+
 
 // /**
 //  * Message Handler
 //  */
-//  const prefix ='+';
+//  const prefix =config.prefix;
 // client.on('messageCreate', message =>{
 
 //     if( !message.content.startsWith(prefix) || message.author.bot) return;
@@ -66,3 +87,5 @@
 //         console.log('default');
 //     }
 // });
+
+}else{console.log('command handler not in debug mode');}
