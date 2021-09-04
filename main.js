@@ -40,8 +40,9 @@ mongoose
     console.log(err);
   });
 
-const client = new Discord.Client({
+ const client = new Discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES"],
+  partials: ["MESSAGE","CHANNEL","REACTION"]
 });
 
 const fs = require("fs");
@@ -57,21 +58,5 @@ client.events = new Discord.Collection();
   require(`./handlers/${handler}`)(client, Discord);
 });
 
-
-/**
- * Variables & Date/Time
- */
-
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, "0");
-var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-var yyyy = today.getFullYear();
-var time =
-  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-today = mm + "/" + dd + "/" + yyyy;
-
-
-
 //Token omitted to separate file
-
 client.login(config.DISCORD_TOKEN);

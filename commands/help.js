@@ -12,9 +12,14 @@ module.exports= {
         `Functions:
         +random: Sends chat a random food item you should get.
         +options: Sends chat a bunch of predetermined options you can get.
-        +set options:
+        +help: you in here dummy
+            
+        Later features:
         +vote: Democracy (to be added later if I'm not lazy)
-        +help: you in here dummy`);
+        +choose: Picks between options the user sets.
+        +user: Sends chat your data & usage stats.
+        +preference: Sets your preference for food.
+        +list: Sends chat all available options`);
 
 
         
