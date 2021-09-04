@@ -14,8 +14,7 @@ module.exports= {
         // console.log(`after ${strOut}`);
 
         message.channel.send(`Here are your options: ${strOut.slice(0,-2)}`);
-        //message.channel.send('pong!');
-
+        
     }
 
 }
