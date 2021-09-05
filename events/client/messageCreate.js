@@ -2,6 +2,8 @@ const { CommandStartedEvent } = require("mongodb");
 const config = require("../../config.json");
 const profileModel = require("../../models/profileSchema");
 
+console.log(`-----------------------------------------`);
+console.log('Start:');
 var uses = 0;
 
 //before db
@@ -16,9 +18,10 @@ var testArray = [
   "bdubs",
   "cook your own food dummy",
   "quesadillas",
+  "tacos"
 ];
 
-console.log(`Food: ${testArray}`);
+console.log(`Food array: ${testArray}`);
 
 module.exports = async (Discord, client, message) => {
   const prefix = config.PREFIX;
@@ -28,16 +31,18 @@ module.exports = async (Discord, client, message) => {
   //create user in collection if not already in db
   let profileData;
   try {
+    console.log(`Sender ID: ${message.author}`);
     profileData = await profileModel.findOne({ userID: message.author.id });
+    //console.log(`loaded profile data: ${profileData}`);
     if (!profileData) {
+      console.log('Creating new entry');
       let profile = await profileModel.create({
         userID: message.author.id,
         serverID: message.guild.id,
-        roles: message.guild.roles,
         preference: "none set",
       });
       profile.save();
-    }
+    }else{console.log(`user found: ${profileData.userID}`);}
   } catch (err) {
     console.log(err);
   }
@@ -60,8 +65,10 @@ module.exports = async (Discord, client, message) => {
   } else if (command === "help") {
     client.commands.get("help").execute(message, args);
   } else if(command ==="user"){
-    client.commands.get("user").execute(message, profileData,args);
+    client.commands.get("user").execute(message, profileData, args);
   } else{
     console.log("default");
   }
+
+  console.log(`-----------------------------------------`);
 };

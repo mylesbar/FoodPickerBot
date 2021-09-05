@@ -26,6 +26,10 @@ const profileSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  user_uses: {
+    type: Number,
+    default: 0,
+  },
   additions: {
     type: Number,
     default: 0,
