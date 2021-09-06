@@ -19,7 +19,10 @@ module.exports= {
         +vote: Democracy (to be added later if I'm not lazy)
         +choose: Picks between options the user sets.
         +preference: Sets your preference for food.
-        +list: Sends chat all available options`);
+        +list: Sends chat all available options.
+        +add: Adds specified item to total food options list
+        
+        Future options rework: 5 random items from total list`);
 
 
         

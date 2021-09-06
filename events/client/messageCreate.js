@@ -1,3 +1,4 @@
+const { ApplicationCommandManager } = require("discord.js");
 const { CommandStartedEvent } = require("mongodb");
 const config = require("../../config.json");
 const profileModel = require("../../models/profileSchema");
@@ -8,17 +9,17 @@ var uses = 0;
 
 //before db
 var testArray = [
-  "pizza",
-  "burger",
-  "ramen",
-  "chinese takeout",
-  "popeyes",
-  "checkers",
-  "halal",
-  "bdubs",
-  "cook your own food dummy",
-  "quesadillas",
-  "tacos"
+  "Pizza",
+  "Burger",
+  "Ramen",
+  "Chinese takeout",
+  "Popeyes",
+  "Checkers",
+  "Halal",
+  "Bdubs",
+  "Cook your own food dummy",
+  "Quesadillas",
+  "Tacos"
 ];
 
 console.log(`Food array: ${testArray}`);
@@ -48,20 +49,28 @@ module.exports = async (Discord, client, message) => {
   }
 
   //message reading
+ 
   const args = message.content.slice(prefix.length).split("/ +/");
-  const command = args.shift().toLowerCase();
-
+  let command = args.shift().toLowerCase();
+  let aux;
+  console.log(`command: ${command}`);
+  if(command.includes(' ')){
+    aux = command.split(' ');
+    command = aux.shift().toLowerCase();
+    console.log(`aux: ${aux}`);
+  }
+  
   //increment Total use counter
   uses++;
   console.log(`uses: ${uses}`);
 
   //command switcher
   if (command === "ping") {
-    client.commands.get("ping").execute(message, args);
+    client.commands.get("ping").execute(message, aux, args);
   } else if (command === "random") {
     client.commands.get("random").execute(message, args, testArray);
   } else if (command === "options") {
-    client.commands.get("options").execute(message, args, testArray);
+    client.commands.get("options").execute(message, aux, testArray, args);
   } else if (command === "help") {
     client.commands.get("help").execute(message, args);
   } else if(command ==="user"){
