@@ -1,7 +1,8 @@
 const { ApplicationCommandManager } = require("discord.js");
 const { CommandStartedEvent } = require("mongodb");
 const config = require("../../config.json");
-const profileModel = require("../../models/profileSchema");
+const profileModel = require("../../models/profileSchema.js");
+const botModel = require(`../../models/botSchema.js`)
 
 console.log(`-----------------------------------------`);
 console.log('Start:');
@@ -27,6 +28,7 @@ console.log(`Food array: ${testArray}`);
 module.exports = async (Discord, client, message) => {
   const prefix = config.PREFIX;
 
+  //checking for valid messsage
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   //create user in collection if not already in db
@@ -49,7 +51,6 @@ module.exports = async (Discord, client, message) => {
   }
 
   //message reading
- 
   const args = message.content.slice(prefix.length).split("/ +/");
   let command = args.shift().toLowerCase();
   let aux;
@@ -75,7 +76,9 @@ module.exports = async (Discord, client, message) => {
     client.commands.get("help").execute(message, args);
   } else if(command ==="user"){
     client.commands.get("user").execute(message, profileData, args);
-  } else{
+  } else if(command === "resetbot"){
+    client.commands.get("resetbot").execute(message, args);
+  }else{
     console.log("default");
   }
 

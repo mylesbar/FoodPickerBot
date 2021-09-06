@@ -5,7 +5,7 @@ const fs = require('fs');
 //debug mode for cloud hosting (maybe?)
 const debug = true;
 
-if(debug){
+
 
 
 module.exports=(client,Discord)=>{
@@ -15,6 +15,7 @@ module.exports=(client,Discord)=>{
          const command = require(`../commands/${file}`)
          if(command.name){
              client.commands.set(command.name, command);
+             console.log(`set: ${command.name}`);
          }else{
              console.log('continued');
              continue;
@@ -23,4 +24,3 @@ module.exports=(client,Discord)=>{
 }
 
 
-}else{console.log('command handler not in debug mode');}
