@@ -1,11 +1,10 @@
-const { ApplicationCommandManager } = require("discord.js");
-const { CommandStartedEvent } = require("mongodb");
+
 const config = require("../../config.json");
 const profileModel = require("../../models/profileSchema.js");
-const botModel = require(`../../models/botSchema.js`)
+const botModel = require(`../../models/botSchema.js`);
 
 console.log(`-----------------------------------------`);
-console.log('Start:');
+console.log("Start:");
 var uses = 0;
 
 //before db
@@ -20,7 +19,7 @@ var testArray = [
   "Bdubs",
   "Cook your own food dummy",
   "Quesadillas",
-  "Tacos"
+  "Tacos",
 ];
 
 console.log(`Food array: ${testArray}`);
@@ -38,14 +37,16 @@ module.exports = async (Discord, client, message) => {
     profileData = await profileModel.findOne({ userID: message.author.id });
     //console.log(`loaded profile data: ${profileData}`);
     if (!profileData) {
-      console.log('Creating new entry');
+      console.log("Creating new entry");
       let profile = await profileModel.create({
         userID: message.author.id,
         serverID: message.guild.id,
         preference: "none set",
       });
       profile.save();
-    }else{console.log(`user found: ${profileData.userID}`);}
+    } else {
+      console.log(`user found: ${profileData.userID}`);
+    }
   } catch (err) {
     console.log(err);
   }
@@ -55,12 +56,12 @@ module.exports = async (Discord, client, message) => {
   let command = args.shift().toLowerCase();
   let aux;
   console.log(`command: ${command}`);
-  if(command.includes(' ')){
-    aux = command.split(' ');
+  if (command.includes(" ")) {
+    aux = command.split(" ");
     command = aux.shift().toLowerCase();
     console.log(`aux: ${aux}`);
   }
-  
+
   //increment Total use counter
   uses++;
   console.log(`uses: ${uses}`);
@@ -74,11 +75,13 @@ module.exports = async (Discord, client, message) => {
     client.commands.get("options").execute(message, aux, testArray, args);
   } else if (command === "help") {
     client.commands.get("help").execute(message, args);
-  } else if(command ==="user"){
+  } else if (command === "user") {
     client.commands.get("user").execute(message, profileData, args);
-  } else if(command === "resetbot"){
+  } else if (command === "add") {
+    client.commands.get("add").execute(message, aux, args);
+  } else if (command === "resetbot") {
     client.commands.get("resetbot").execute(message, args);
-  }else{
+  } else {
     console.log("default");
   }
 

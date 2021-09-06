@@ -1,6 +1,6 @@
 mongoose = require("mongoose");
 
-const profileSchema = new mongoose.Schema({
+const botSchema = new mongoose.Schema({
   bot_ID: {
     type: String,
     default: "bot",
@@ -27,5 +27,5 @@ const profileSchema = new mongoose.Schema({
   },
 });
 
-const modelBot = mongoose.model("botModel", profileSchema);
+const modelBot = mongoose.model("botModel", botSchema);
 module.exports = modelBot;
