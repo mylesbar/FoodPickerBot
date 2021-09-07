@@ -12,20 +12,22 @@ module.exports= {
         `Core Functions:
         +random: Sends chat a random food item you should get.
         +options: Sends chat a bunch of predetermined options you can get.
-        +help: you in here dummy
         +user: Sends chat your data & usage stats.
+        +help: you in here dummy
 
         Data Functions:
-        +add [Food/Drink/Place] [ItemHere]: Adds specified item to total food options list. (i.e. "+add food pizza")
+        +add [Food/Drink/Place] <ItemHere>: Adds specified item to total food options list. (i.e. "+add food pizza")
             
         Later features:
         +vote: Democracy (to be added later if I'm not lazy)
         +choose: Picks between options the user sets.
         +preference: Sets your preference for food.
-        +list: Sends chat all available options.
+        +list: Sends chat all available options (might scrap for overcrowding reasons).
         
         
-        Future options rework: 5 random items from total list`);
+        Future reworks:
+            +options: Will only send 5 random items from total list
+            +random: Can filter by food, drink, or place`);
 
 
         
