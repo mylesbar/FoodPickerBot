@@ -16,7 +16,7 @@ module.exports= {
         +user: Sends chat your data & usage stats.
 
         Data Functions:
-        +add [Food/Drink] [FoodItemHere]: Adds specified item to total food options list. (i.e. "+add food pizza")
+        +add [Food/Drink/Place] [ItemHere]: Adds specified item to total food options list. (i.e. "+add food pizza")
             
         Later features:
         +vote: Democracy (to be added later if I'm not lazy)

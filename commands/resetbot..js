@@ -10,7 +10,8 @@ module.exports = {
       botData = botModel.findOne({ userID: "bot" });
       if (botData) {
         console.log(`removing current bot document from bot collection`);
-        botModel.remove({});
+        botModel.deleteOne({userID:"bot"}).exec();
+        console.log(`bot deleted`);
       } else {
         console.log("bot not found");
       }

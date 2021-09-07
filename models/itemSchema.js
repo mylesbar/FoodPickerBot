@@ -8,7 +8,7 @@ const itemSchema = new mongoose.Schema({
   item_type: {
     type: String,
     required: true,
-    enum : ['food','drink'],
+    enum : ['food','drink','place'],
     default: 'food',
   },
   times_queried: {

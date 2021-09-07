@@ -4,6 +4,7 @@ const botSchema = new mongoose.Schema({
   bot_ID: {
     type: String,
     default: "bot",
+    unique: true,
   },
   total_uses: {
     type: Number,

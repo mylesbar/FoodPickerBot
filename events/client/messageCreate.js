@@ -70,7 +70,7 @@ module.exports = async (Discord, client, message) => {
   if (command === "ping") {
     client.commands.get("ping").execute(message, aux, args);
   } else if (command === "random") {
-    client.commands.get("random").execute(message, args, testArray);
+    client.commands.get("random").execute(message, args);
   } else if (command === "options") {
     client.commands.get("options").execute(message, aux, testArray, args);
   } else if (command === "help") {
