@@ -5,7 +5,7 @@ const itemModel = require("../models/itemSchema.js");
 module.exports = {
   name: "random",
   description: "Prints out a random food item from DB",
-
+  
   //future rework: multiple argument passing [+random (place/drink/food) ]
   async execute(message, args) {
     console.log("random select");
