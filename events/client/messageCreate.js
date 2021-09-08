@@ -1,4 +1,3 @@
-
 const config = require("../../config.json");
 const profileModel = require("../../models/profileSchema.js");
 const botModel = require(`../../models/botSchema.js`);
@@ -8,21 +7,20 @@ console.log("Start:");
 var uses = 0;
 
 //before db
-var testArray = [
-  "Pizza",
-  "Burger",
-  "Ramen",
-  "Chinese takeout",
-  "Popeyes",
-  "Checkers",
-  "Halal",
-  "Bdubs",
-  "Cook your own food dummy",
-  "Quesadillas",
-  "Tacos",
-];
-
-console.log(`Food array: ${testArray}`);
+// var testArray = [
+//   "Pizza",
+//   "Burger",
+//   "Ramen",
+//   "Chinese takeout",
+//   "Popeyes",
+//   "Checkers",
+//   "Halal",
+//   "Bdubs",
+//   "Cook your own food dummy",
+//   "Quesadillas",
+//   "Tacos",
+// ];
+// console.log(`Food array: ${testArray}`);
 
 module.exports = async (Discord, client, message) => {
   const prefix = config.PREFIX;
@@ -72,7 +70,7 @@ module.exports = async (Discord, client, message) => {
   } else if (command === "random") {
     client.commands.get("random").execute(message, args);
   } else if (command === "options") {
-    client.commands.get("options").execute(message, aux, testArray, args);
+    client.commands.get("options").execute(message, aux, args);
   } else if (command === "help") {
     client.commands.get("help").execute(message, args);
   } else if (command === "user") {
@@ -81,6 +79,8 @@ module.exports = async (Discord, client, message) => {
     client.commands.get("add").execute(message, aux, args);
   } else if (command === "resetbot") {
     client.commands.get("resetbot").execute(message, args);
+  } else if (command === "updates") {
+    client.commands.get("updates").execute(message, args);
   } else {
     console.log("default");
   }
