@@ -64,26 +64,51 @@ module.exports = async (Discord, client, message) => {
   uses++;
   console.log(`uses: ${uses}`);
 
-  //command switcher
-  if (command === "ping") {
-    client.commands.get("ping").execute(message, aux, args);
-  } else if (command === "random") {
-    client.commands.get("random").execute(message, args);
-  } else if (command === "options") {
-    client.commands.get("options").execute(message, aux, args);
-  } else if (command === "help") {
-    client.commands.get("help").execute(message, args);
-  } else if (command === "user") {
-    client.commands.get("user").execute(message, profileData, args);
-  } else if (command === "add") {
-    client.commands.get("add").execute(message, aux, args);
-  } else if (command === "resetbot") {
-    client.commands.get("resetbot").execute(message, args);
-  } else if (command === "updates") {
-    client.commands.get("updates").execute(message, args);
-  } else {
-    console.log("default");
-  }
+  try {
+    //hold = await botModel.updateOne({ bot_ID: "bot" }, { $inc: { total_uses: 1, pings: 1 } });
+    //   console.log("bot updated");
+    hold = await botModel.findOne({ bot_ID: "bot" });
+    //   console.log(`Bot after update:
+    //   total use ${hold.total_uses}
+    //   pings: ${hold.pings}`);
+
+    // } catch (err) { console.log(err); }
+
+
+    //command switcher
+    if (command === "ping") {
+      client.commands.get("ping").execute(message, aux, args);
+      hold = await botModel.updateOne({ bot_ID: "bot" }, { $inc: { total_uses: 1, pings: 1 } });
+    } else if (command === "random") {
+      client.commands.get("random").execute(message, args);
+      hold = await botModel.updateOne({ bot_ID: "bot" }, { $inc: { total_uses: 1, random_uses: 1 } });
+    } else if (command === "options") {
+      client.commands.get("options").execute(message, aux, args);
+      hold = await botModel.updateOne({ bot_ID: "bot" }, { $inc: { total_uses: 1, options_uses: 1 } });
+    } else if (command === "help") {
+      client.commands.get("help").execute(message, args);
+      hold = await botModel.updateOne({ bot_ID: "bot" }, { $inc: { total_uses: 1, help_uses: 1 } });
+    } else if (command === "user") {
+      client.commands.get("user").execute(message, profileData, args);
+      hold = await botModel.updateOne({ bot_ID: "bot" }, { $inc: { total_uses: 1, user_uses: 1 } });
+    } else if (command === "add") {
+      client.commands.get("add").execute(message, aux, args);
+      hold = await botModel.updateOne({ bot_ID: "bot" }, { $inc: { total_uses: 1, add_uses: 1 } });
+    } else if (command === "resetbot") {
+      client.commands.get("resetbot").execute(message, args);
+      hold = await botModel.updateOne({ bot_ID: "bot" }, { $inc: { total_uses: 1, bot_resets: 1 } });
+    } else if (command === "updates") {
+      client.commands.get("updates").execute(message, args);
+      hold = await botModel.updateOne({ bot_ID: "bot" }, { $inc: { total_uses: 1, updates_uses: 1 } });
+    } else {
+      console.log("default");
+    }
+
+    console.log(`Bot after update:
+      total use ${hold.total_uses}
+      hold: ${hold}}`);
+  } catch (err) { console.log(err); }
+
 
   console.log(`-----------------------------------------`);
 };

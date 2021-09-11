@@ -10,6 +10,10 @@ const botSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  pings: {
+    type: Number,
+    default: 0,
+  },
   random_uses: {
     type: Number,
     default: 0,
@@ -23,6 +27,18 @@ const botSchema = new mongoose.Schema({
     default: 0,
   },
   user_uses: {
+    type: Number,
+    default: 0,
+  },
+  add_uses: {
+    type: Number,
+    default: 0,
+  },
+  updates_uses: {
+    type: Number,
+    default: 0,
+  },
+  bot_resets: {
     type: Number,
     default: 0,
   },
