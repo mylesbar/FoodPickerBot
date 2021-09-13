@@ -38,6 +38,10 @@ const botSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  choose_uses: {
+    type: Number,
+    default: 0,
+  },
   bot_resets: {
     type: Number,
     default: 0,

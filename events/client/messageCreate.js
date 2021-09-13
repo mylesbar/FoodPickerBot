@@ -53,6 +53,8 @@ module.exports = async (Discord, client, message) => {
   const args = message.content.slice(prefix.length).split("/ +/");
   let command = args.shift().toLowerCase();
   let aux;
+
+  
   console.log(`command: ${command}`);
   if (command.includes(" ")) {
     aux = command.split(" ");
@@ -74,6 +76,8 @@ module.exports = async (Discord, client, message) => {
 
     // } catch (err) { console.log(err); }
 
+
+    //TODO: restructure handler
 
     //command switcher
     if (command === "ping") {
@@ -100,13 +104,16 @@ module.exports = async (Discord, client, message) => {
     } else if (command === "updates") {
       client.commands.get("updates").execute(message, args);
       hold = await botModel.updateOne({ bot_ID: "bot" }, { $inc: { total_uses: 1, updates_uses: 1 } });
+    } else if (command === "choose") {
+      client.commands.get("choose").execute(message, aux, args);
+      hold = await botModel.updateOne({ bot_ID: "bot" }, { $inc: { total_uses: 1, choose_uses: 1 } });
     } else {
       console.log("default");
     }
 
-    console.log(`Bot after update:
-      total use ${hold.total_uses}
-      hold: ${hold}}`);
+    // console.log(`Bot after update:
+    //   total use ${hold.total_uses}
+    //   hold: ${hold}}`);
   } catch (err) { console.log(err); }
 
 

@@ -14,7 +14,7 @@ module.exports = {
     //Query document from DB and store item name in array.
     //Send array to chat
 
-    console.log("options select");
+    console.log("options selected");
 
     let result = [];
     let i = 0;
