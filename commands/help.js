@@ -12,6 +12,7 @@ module.exports = {
         +user: Sends chat your data & usage stats 📊
         +updates: Sends chat future update plans 📓
         +help: You in here dummy 🤨
+        +choose: Chooses an item from a comma-separated list of foods you send it (e.g. +choose pizza, ramen, burger)
 
         Data Functions:
             +add [Food/Drink/Place] <ItemHere> : Adds specified item to total food options list. (i.e. "+add food pizza")`
